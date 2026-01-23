@@ -2,9 +2,12 @@ const Redis = require("ioredis");
 const GameKPI = require("./../models/gameKpiModel");
 const mongoose = require("mongoose");
 const utils = require("./../utils/utils");
+const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, "../config.env") });
 class DashboardEventHandler {
   constructor() {
     debugger;
+    console.log(process.env.REDIS_HOST);
     // Create dedicated subscriber client
     this.subscriber = new Redis({
       host: process.env.REDIS_HOST || "localhost",

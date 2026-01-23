@@ -1,0 +1,28 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gradient Definitions -->
+  <defs>
+    <linearGradient id="knightGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Sharp shadow for clarity -->
+    <filter id="sharpShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="1" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background circle for contrast -->
+  <circle cx="50" cy="50" r="48" fill="white" stroke="url(#knightGradient)" stroke-width="3"/>
+  
+  <!-- Knight Unicode Character - Large and Bold -->
+  <text 
+    x="50" 
+    y="72" 
+    font-size="65" 
+    font-family="'Segoe UI Symbol', 'Noto Sans Symbols', Arial, sans-serif"
+    font-weight="bold"
+    fill="url(#knightGradient)"
+    text-anchor="middle"
+    filter="url(#sharpShadow)">♞</text>
+</svg>

@@ -17,25 +17,28 @@ exports.protect = catchAsync(async (req, res, next) => {
           headers: {
             Cookie: "jwt=" + cookie + ";",
           },
-        }
+        },
       );
       if (response.status != 200) {
         return next(
           new AppError(
             "You are not logged in! Please log in to get access.",
-            401
-          )
+            401,
+          ),
         );
       }
       res.locals.userId = response.data.currentUser._id;
     } catch (e) {
       return next(
-        new AppError("You are not logged in! Please log in to get access.", 401)
+        new AppError(
+          "You are not logged in! Please log in to get access.",
+          401,
+        ),
       );
     }
   } else {
     return next(
-      new AppError("You are not logged in! Please log in to get access.", 401)
+      new AppError("You are not logged in! Please log in to get access.", 401),
     );
   }
 
@@ -81,7 +84,7 @@ exports.analyse = catchAsync(async (req, res, next) => {
 
     const kpi = await utils.computeAndStoreGameKPI(
       analysis_results._id,
-      userColor
+      userColor,
     );
     kpi.userId = new mongoose.Types.ObjectId(res.locals.userId);
     kpi.userColor = userColor;
@@ -113,61 +116,36 @@ exports.analyse = catchAsync(async (req, res, next) => {
   }
 });
 
-// const catchAsync = require("./../utils/catchAsync");
-// const AppError = require("./../utils/appError");
-// const utils = require("./../utils/utils");
-// const { clean } = require("xss-clean/lib/xss");
-// const AnalysisModel = require("./../models/analysisModel");
-// const chessAnalysisPublisher = require("./../services/chessAnalysisPublisher");
+exports.getUserAnalyses = catchAsync(async (req, res, next) => {
+  try {
+    const userId = res.locals.userId;
 
-// exports.analyse = catchAsync(async (req, res, next) => {
-//   try {
-//     let { pgn, userColor = "WHITE" } = req.body;
-//     if (!pgn) {
-//       return next(new AppError("PGN is required", 400));
-//     }
-//     // Step 1: Extract and clean
-//     const movesToParse = pgn.moves.replace(/\[%[^\]]*\]/g, "");
+    if (!userId) {
+      return next(new AppError("User not authenticated", 401));
+    }
 
-//     // Step 2: Combine with headers for a full valid PGN string
-//     let fullPgnString = "";
-//     Object.entries(pgn.headers).forEach(([key, value]) => {
-//       fullPgnString += `[${key} "${value}"]\n`;
-//     });
-//     fullPgnString += `\n${movesToParse}`;
-//     console.log(fullPgnString);
-//     const positions = utils.generatePositions(fullPgnString);
-//     const results = await utils.analyzeGame(positions);
-//     const enrichedResult = utils.enrich(results);
-//     const finalResult = utils.annotateMoves(enrichedResult, userColor);
-//     const analysis_results = await AnalysisModel.create({
-//       engine: {
-//         name: "Stockfish",
-//         version: "dev-20251221",
-//       },
-//       data: {
-//         finalResult,
-//       },
-//     });
+    const analyses = await AnalysisModel.find({
+      userId: new mongoose.Types.ObjectId(userId),
+    })
+      .sort({ createdAt: -1 }) // most recent first
+      .lean();
 
-//     const kpi = await utils.computeAndStoreGameKPI(
-//       analysis_results._id,
-//       userColor
-//     );
-//     await chessAnalysisPublisher.publishGameAnalysisCompleted(kpi);
-//     console.log("KPI computed:", kpi);
-//     if (finalResult != null) {
-//       res.status(201).json({
-//         status: "success",
-//         data: {
-//           analysis_results,
-//         },
-//       });
-//     } else {
-//       return next(new AppError("Error analyzing the game", 500));
-//     }
-//   } catch (e) {
-//     console.log(e);
-//     return next(new AppError(e.response.message, e.response.status));
-//   }
-// });
+    res.status(200).json({
+      status: "success",
+      results: analyses.length,
+      data: {
+        analyses,
+      },
+    });
+  } catch (e) {
+    console.error("❌ Error fetching user analyses:", e);
+    return next(
+      new AppError(e.message || "Error fetching analysis results", 500),
+    );
+  }
+});
+exports.healthCheck = catchAsync(async (req, res, next) => {
+  res.status(200).json({
+    status: "success",
+  });
+});
