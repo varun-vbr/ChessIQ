@@ -604,13 +604,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - OpenAI for AI capabilities
 - The open-source community
 
-## 📞 Support
-
-For support, please:
-1. Check existing documentation
-2. Search closed issues
-3. Open a new issue with detailed information
-
 ---
 
 **Built with ♟️ by a chess enthusiast for chess enthusiasts**
