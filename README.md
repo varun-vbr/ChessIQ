@@ -81,8 +81,8 @@ ChessIQ follows a microservices architecture with a React frontend and Node.js b
               │                │                │
 ┌─────────────▼─────┐  ┌──────▼──────┐  ┌─────▼──────────┐
 │  Auth Service     │  │  Dashboard  │  │ Training Plan  │
-│   (Port 5001)     │  │   Service   │  │    Service     │
-│                   │  │ (Port 5003) │  │  (Port 5004)   │
+│   (Port 3002)     │  │   Service   │  │    Service     │
+│                   │  │ (Port 3001) │  │  (Port 3003)   │
 │ • JWT Auth        │  │             │  │                │
 │ • User CRUD       │  │ • KPI Calc  │  │ • AI Generate  │
 │ • Token Refresh   │  │ • Analytics │  │ • Plan CRUD    │
@@ -92,7 +92,7 @@ ChessIQ follows a microservices architecture with a React frontend and Node.js b
           │            │   Chess     │            │
           │            │  Analysis   │            │
           │            │   Service   │            │
-          │            │ (Port 5002) │            │
+          │            │ (Port 3000) │            │
           │            │             │            │
           │            │ • Stockfish │            │
           │            │ • PGN Parse │            │
