@@ -2,8 +2,6 @@
 
 A comprehensive chess analysis and training platform that leverages AI and chess engines to help players improve their game through detailed analysis, personalized training plans, and performance tracking.
 
-🌐 **Live Demo**: [chessiq.online](https://chessiq.online)
-
 ## 📋 Table of Contents
 
 - [Overview](#overview)
