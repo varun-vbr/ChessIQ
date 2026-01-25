@@ -219,7 +219,7 @@ cd chessiq-ui
 npm install
 
 # Install backend service dependencies
-cd ../backend/auth-service
+cd ../auth-service
 npm install
 
 cd ../chess-analysis-service
