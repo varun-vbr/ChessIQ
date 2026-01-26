@@ -117,7 +117,7 @@ ChessIQ follows a microservices architecture with a React frontend and Node.js b
 │  • games          - Chess game data and PGN                      │
 │  • analyses       - Stockfish analysis results                   │
 │  • trainingplans  - AI-generated training content                │
-│  • sessions       - User session tokens                          │
+│                       │
 └────────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────┐
