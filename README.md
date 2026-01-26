@@ -58,7 +58,7 @@ ChessIQ follows a microservices architecture with a React frontend and Node.js b
 │                         CLIENT LAYER                             │
 │                                                                   │
 │  ┌────────────────────────────────────────────────────────┐    │
-│  │              React Frontend (Port 3000)                 │    │
+│  │              React Frontend (Port 80)                 │    │
 │  │                                                          │    │
 │  │  • Authentication UI      • Game Analysis UI           │    │
 │  │  • Dashboard & Charts     • Training Plan UI           │    │
