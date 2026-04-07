@@ -595,7 +595,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 **Varun Rao**
 - Target Role: Staff Software Engineer
 - Chess Rating: ~1130-1170
-- GitHub: [Your GitHub Profile]
 
 ## 🙏 Acknowledgments
 
